@@ -9,15 +9,15 @@ import javax.swing.JOptionPane;
 public class StenSaxPåse implements ActionListener {
 
     private JFrame frame;
-    private JButton rockButton;
-    private JButton paperButton;
-    private JButton scissorsButton;
+    private JButton stenKnapp;
+    private JButton påseKnapp;
+    private JButton saxKnapp;
 
     public StenSaxPåse() {
-        frame = new JFrame("Rock Paper Scissors");
-        rockButton = new JButton("Rock");
-        paperButton = new JButton("Paper");
-        scissorsButton = new JButton("Scissors");
+        frame = new JFrame("Sten Sax Påse");
+        stenKnapp = new JButton("Sten");
+        påseKnapp = new JButton("Påse");
+        saxKnapp = new JButton("Sax");
 
         createGUI();
     }
@@ -25,54 +25,57 @@ public class StenSaxPåse implements ActionListener {
     private void createGUI() {
         frame.setLayout(null);
 
-        rockButton.setBounds(50, 50, 100, 50);
-        paperButton.setBounds(50, 120, 100, 50);
-        scissorsButton.setBounds(50, 190, 100, 50);
+        stenKnapp.setBounds(50, 50, 100, 50);
+        påseKnapp.setBounds(50, 120, 100, 50);
+        saxKnapp.setBounds(50, 190, 100, 50);
 
-        frame.add(rockButton);
-        frame.add(paperButton);
-        frame.add(scissorsButton);
+        frame.add(stenKnapp);
+        frame.add(påseKnapp);
+        frame.add(saxKnapp);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 300);
         frame.setLocationRelativeTo(null);
-//testar
-        rockButton.addActionListener(this);
-        paperButton.addActionListener(this);
-        scissorsButton.addActionListener(this);
+
+        stenKnapp.addActionListener(this);
+        påseKnapp.addActionListener(this);
+        saxKnapp.addActionListener(this);
 
         frame.setVisible(true);
+    }
+
+    private void stenKnappsetBounds(int i, int j, int k, int l) {
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
 
-        if (source == rockButton || source == paperButton || source == scissorsButton) {
+        if (source == saxKnapp || source == påseKnapp || source == saxKnapp) {
             String userChoice = ((JButton) source).getText();
             String computerChoice = generateComputerChoice();
 
-            String result = determineWinner(userChoice, computerChoice);
+            String result = vemVinner(userChoice, computerChoice);
 
-            JOptionPane.showMessageDialog(null, "You chose: " + userChoice + "\nComputer chose: " + computerChoice + "\n" + result);
+            JOptionPane.showMessageDialog(null, "Du väljer: " + userChoice + "\nComputer chose: " + computerChoice + "\n" + result);
         }
     }
 
     private String generateComputerChoice() {
-        String[] choices = {"Rock", "Paper", "Scissors"};
+        String[] choices = {"Sten", "Påse", "Sax"};
         int randomIndex = (int) (Math.random() * choices.length);
         return choices[randomIndex];
     }
 
-    private String determineWinner(String userChoice, String computerChoice) {
+    private String vemVinner (String userChoice, String computerChoice) {
         if (userChoice.equals(computerChoice)) {
-            return "It's a tie!";
-        } else if ((userChoice.equals("Rock") && computerChoice.equals("Scissors"))
-                || (userChoice.equals("Paper") && computerChoice.equals("Rock"))
-                || (userChoice.equals("Scissors") && computerChoice.equals("Paper"))) {
-            return "You win!";
+            return "Oavgjort!";
+        } else if ((userChoice.equals("Sten") && computerChoice.equals("Sax"))
+                || (userChoice.equals("Påse") && computerChoice.equals("Sten"))
+                || (userChoice.equals("Sax") && computerChoice.equals("Påse"))) {
+            return "Du van!";
         } else {
-            return "Datorn vann!";
+            return "Datorn Vinner!!";
         }}}
 
     
